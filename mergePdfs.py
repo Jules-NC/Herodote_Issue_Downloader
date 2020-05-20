@@ -13,12 +13,12 @@ def mergepdfs(pdfs, name):
     merger.close()
 
 
-def findFiles(number):
+def findFiles(issue):
     results = []
     files = os.listdir('./pdfs/')
-    print('FILES:', files)
+
     for file in files:
-        result = re.match(r'HER_([' + str(number) + ']*)_([0-9]*)[.]pdf', file)
+        result = re.match(r'HER_' + str(issue) + '_([0-9]*)[.]pdf', file)
         if result == None:
             pass
         else:
@@ -27,8 +27,14 @@ def findFiles(number):
     return results
 
 
-results = findFiles(176)    # ISSUE 176
-print('Files found:', results)
-name = 'Herodote_'+ results[0][4:7] + '.pdf'
-mergepdfs(results, name)
-print('SUCCESS, file writed as:', name)
+def createIssue(issue):
+    results = findFiles(issue)
+    print('Files found for issue', issue, ':', len(results), '|', results)
+    name = 'Herodote_'+ str(issue) + '.pdf'
+    mergepdfs(results, name)
+    print('SUCCESS, file writed as:', name, '\n')
+
+
+for issue in range(171, 177):
+    createIssue(issue)
+    
