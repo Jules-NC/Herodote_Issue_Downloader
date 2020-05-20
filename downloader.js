@@ -6,7 +6,7 @@ function downloadIssue(){
     for(let i = 2; i<elements.length; i+=3){
         articles_ids.push(elements[i].getAttribute("data-id_article"))
     }
-    for(id of articles_ids){
+    for(let id of articles_ids){
         window.open('./load_pdf.php?ID_ARTICLE='+id+'&download=1')
         articles_pdfs.push('./load_pdf.php?ID_ARTICLE='+id+'.pdf')
     }
